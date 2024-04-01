@@ -4,6 +4,16 @@ class Person {
     if (!person.cpf) throw new Error('CPF is required')
   }
 
+  static format(person){
+    const [name, ...lastName] = person.name.split(' ')
+    return {
+        cpf: person.cpf.replace(/\D/g, ''),
+        name, 
+        lastName: lastName.join(' ')
+    }
+  }
+
+
   static process (person) {
     this.validate(person)
     return 'ok'
