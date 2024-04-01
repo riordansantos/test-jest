@@ -50,4 +50,27 @@ describe('#Person Suite', () => {
       expect(formattedPerson).toStrictEqual(expectedPerson)
     })
   })
+  describe('#save', () => {
+    it('should throw an error if person is invalid', () => {
+      const mockInvalidPerson = {
+        name: 'John Doe',
+        cpf: '123.456.789-00'
+      }
+
+      expect(() => Person.save(mockInvalidPerson)).toThrow(
+        new Error(
+          'cannot save invalid person: {"name":"John Doe","cpf":"123.456.789-00"}'
+        )
+      )
+    })
+    it('should not throw an error if person is valid', () => {
+      const mockValidPerson = {
+        name: 'John',
+        lastName: 'Doe',
+        cpf: '12345678900'
+      }
+
+      expect(() => Person.save(mockValidPerson)).not.toThrow()
+    })
+  })
 })
