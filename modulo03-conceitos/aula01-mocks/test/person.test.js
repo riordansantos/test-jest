@@ -51,18 +51,25 @@ describe('#Person Suite', () => {
     })
   })
   describe('#save', () => {
-    it('should throw an error if person is invalid', () => {
-      const mockInvalidPerson = {
-        name: 'John Doe',
-        cpf: '123.456.789-00'
-      }
+    const requiredProps = ['name', 'lastName', 'cpf']
 
-      expect(() => Person.save(mockInvalidPerson)).toThrow(
-        new Error(
-          'cannot save invalid person: {"name":"John Doe","cpf":"123.456.789-00"}'
+    requiredProps.forEach(prop => {
+      it(`should throw an error if ${prop} is missing`, () => {
+        const mockInvalidPerson = {
+          name: 'John',
+          lastName: 'Doe',
+          cpf: '12345678900'
+        }
+        delete mockInvalidPerson[prop]
+
+        expect(() => Person.save(mockInvalidPerson)).toThrow(
+          new Error(
+            `cannot save invalid person: ${JSON.stringify(mockInvalidPerson)}`
+          )
         )
-      )
+      })
     })
+
     it('should not throw an error if person is valid', () => {
       const mockValidPerson = {
         name: 'John',
