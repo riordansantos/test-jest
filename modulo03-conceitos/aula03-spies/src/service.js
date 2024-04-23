@@ -6,9 +6,7 @@ export default class Service {
     this.#filename = filename
   }
   #hashPassword (password) {
-    const hash = crypto.createHash('sha256')
-    hash.update(password)
-    return hash.digest('hex')
+    return crypto.createHash('sha256').update(password).digest('hex')
   }
   create ({ username, password }) {
     const data = JSON.stringify({
