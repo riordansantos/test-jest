@@ -12,6 +12,6 @@ export default server
 /*
     curl -i -X POST \
     -H "Content-Type: application/json" \
-    -d '{"name": "riordansantos", "cpf": "01131937341"}' \
+    -d '{"name": "riordan santos", "cpf": "01131937341"}' \
     http://localhost:3000/persons
 */
